@@ -1,6 +1,10 @@
 import { useTheme } from "@/Providers/Provider";
-import { BlockNoteView, useBlockNote } from "@blocknote/react";
+import {
+  BlockNoteEditor,
+  uploadToTmpFilesDotOrg_DEV_ONLY,
+} from "@blocknote/core";
 import "@blocknote/core/style.css";
+import { BlockNoteView, useBlockNote } from "@blocknote/react";
 
 type EditorType = {
   editable: boolean;
@@ -11,8 +15,9 @@ type EditorType = {
 function Editor({ editable, onChange, initialContent }: EditorType) {
   const { theme } = useTheme();
 
-  const editor = useBlockNote({
+  const editor: BlockNoteEditor = useBlockNote({
     editable,
+    uploadFile: uploadToTmpFilesDotOrg_DEV_ONLY,
     initialContent: initialContent ? JSON.parse(initialContent) : null,
     onEditorContentChange: (editor) => {
       onChange(JSON.stringify(editor.topLevelBlocks, null, 2));

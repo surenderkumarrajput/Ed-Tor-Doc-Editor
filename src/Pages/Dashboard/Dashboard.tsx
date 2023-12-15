@@ -1,5 +1,7 @@
+import { lazy } from "react";
 import DashboardNavBar from "./_components/DashboardNavBar";
-import MainContent from "./_components/MainContent";
+const MainContent = lazy(() => import("./_components/MainContent"));
+
 import SideBar from "./_components/Sidebar";
 
 function Dashboard() {
@@ -20,7 +22,7 @@ function Dashboard() {
              overflow-y-auto 
            "
           >
-            <MainContent />
+            <MainContent isEditable={true} pageMode={false} />
           </div>
         </div>
       </div>
