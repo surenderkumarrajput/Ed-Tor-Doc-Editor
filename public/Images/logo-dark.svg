@@ -1,0 +1,15 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" width="2048" height="2048">
+	<title>logo-dark-svg</title>
+	<style>
+		tspan { white-space:pre } 
+		.t0 { font-size: 1100px;fill: #ffffff;font-weight: 400;font-family: "Coustard-Regular", "Coustard" } 
+		.s1 { fill: #ffffff;stroke: #ffffff;stroke-linecap: square;stroke-width: 81.7 } 
+	</style>
+	<text id="E" style="transform: matrix(1,0,0,1,651,1304)" >
+		<tspan x="0" y="0" class="t0">E</tspan><tspan  y="0" class="t0">
+</tspan>
+	</text>
+	<g id="document">
+		<path id="Layer" class="s1" d="m562.1 1393l-115.5 115.5c318.7 318.7 836.1 318.7 1154.8 0l-115.5-115.5c-255.2 255.2-668.6 255.2-923.8 0z"/>
+	</g>
+</svg>
