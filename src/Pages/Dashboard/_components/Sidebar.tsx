@@ -1,8 +1,28 @@
 import { Button } from "@/components/ui/button";
 import { Plus, Trash } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link, createSearchParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ConvexClient } from "@/App";
+import { api } from "../../../../convex/_generated/api";
+import Loading from "@/components/Loading/Loading";
+import Share from "@/components/Share/Share";
+import { DocumentType } from "@/Types/Types";
+import { Id } from "convex/_generated/dataModel";
+import { DocDataContext } from "@/Context/Context";
 
 function SideBar() {
+  const navigate = useNavigate();
+
+  const {
+    user,
+    sideBarOpen,
+    setsideBarOpen,
+    docData,
+    documentId,
+    documents,
+  }: any = useContext(DocDataContext);
+
   const sideBarClassname = cn(
     `
       fixed
@@ -23,12 +43,32 @@ function SideBar() {
       flex-col
       items-center
      `,
-    `${true ? "flex" : "hidden"}`,
+    `${sideBarOpen ? "flex" : "hidden"}`,
     `lg:flex`
   );
 
-  const onCreate = async () => {};
-  const onDelete = async () => {};
+  const onCreate = async () => {
+    await ConvexClient.mutation(api.Documents.AddDocuments, {
+      owner: user.id,
+    });
+  };
+  const onDelete = async (docId: Id<"DocumentData">) => {
+    const id = await ConvexClient.mutation(api.Documents.DeleteDocumentById, {
+      id: docId,
+      uid: user.id,
+    });
+    if (id === documentId) {
+      navigate("/dashboard");
+    }
+  };
+
+  if (!documents) {
+    return (
+      <div className={sideBarClassname}>
+        <Loading />
+      </div>
+    );
+  }
 
   return (
     <div className={sideBarClassname}>
@@ -37,23 +77,30 @@ function SideBar() {
           New Doc
           <Plus size={20} />
         </Button>
+        {docData ? <Share /> : null}
       </div>
 
-      {Array.from({ length: 5 })?.map((e, index) => (
-        <li className="w-full flex" key={index}>
+      {documents?.map((e: DocumentType) => (
+        <li className="w-full flex" key={e._id}>
           <Button
             variant={"ghost"}
-            asChild
             className="w-full justify-start"
-            onClick={() => {}}
+            onClick={() => {
+              navigate({
+                search: createSearchParams({
+                  documentId: e._id,
+                }).toString(),
+              });
+              setsideBarOpen(false);
+            }}
           >
-            <h2>{index}</h2>
+            {e?.title}
           </Button>
           <Button
             variant={"ghost"}
             className="rounded-xl"
             onClick={() => {
-              onDelete();
+              onDelete(e._id);
             }}
             size={"icon"}
           >

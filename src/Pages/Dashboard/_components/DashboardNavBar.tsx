@@ -6,9 +6,14 @@ import { Link } from "react-router-dom";
 import { SignedIn, UserButton } from "@clerk/clerk-react";
 import Logo from "@/components/Navbar/Logo";
 import { ModeToggle } from "@/components/ModeToggle/ModeToggle";
+import Title from "./Title";
+import { useContext } from "react";
+import { DocDataContext } from "@/Context/Context";
 
 function DashboardNavBar() {
   const isScrolled = useScrollTop({ threshold: 10 });
+  const { setsideBarOpen }: any = useContext(DocDataContext);
+
   return (
     <div
       className={cn(
@@ -25,10 +30,13 @@ function DashboardNavBar() {
           variant="outline"
           size="icon"
           className="lg:hidden"
-          onClick={() => {}}
+          onClick={() => {
+            setsideBarOpen((value: boolean) => !value);
+          }}
         >
           <List className="h-4 w-4" />
         </Button>
+        <Title />
       </div>
       <div className="flex gap-2 items-center">
         <SignedIn>

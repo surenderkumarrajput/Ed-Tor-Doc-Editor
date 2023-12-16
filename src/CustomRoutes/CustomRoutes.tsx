@@ -6,6 +6,7 @@ import ProtectedRoutes from "./ProtectedRoutes";
 const LandingPage = lazy(() => import("@/Pages/LandingPage/LandingPage"));
 const NotFoundPage = lazy(() => import("@/Pages/NotFound/NotFound"));
 const DashboardPage = lazy(() => import("@/Pages/Dashboard/Dashboard"));
+const ViewerPage = lazy(() => import("@/Pages/ViewerPage/ViewerPage"));
 
 function CustomRoutes() {
   return (
@@ -26,6 +27,14 @@ function CustomRoutes() {
               <ProtectedRoutes>
                 <DashboardPage />
               </ProtectedRoutes>
+            </Suspense>
+          }
+        />
+        <Route
+          path="/page"
+          element={
+            <Suspense fallback={<Loading />}>
+              <ViewerPage />
             </Suspense>
           }
         />
