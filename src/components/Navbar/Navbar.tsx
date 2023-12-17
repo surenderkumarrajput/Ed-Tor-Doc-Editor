@@ -7,7 +7,7 @@ import { SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { Spinner } from "../Loading/Spinner";
 import { ModeToggle } from "../ModeToggle/ModeToggle";
 
-function Navbar() {
+function Navbar({ pageMode }: { pageMode: boolean }) {
   const isScrolled = useScrollTop({ threshold: 10 });
   const { isLoaded, isSignedIn } = useUser();
 
@@ -30,8 +30,8 @@ function Navbar() {
             <Button asChild>
               <SignInButton
                 mode="modal"
-                afterSignUpUrl={"/dashboard"}
-                afterSignInUrl={"/dashboard"}
+                afterSignUpUrl={pageMode ? window.location.href : "/dashboard"}
+                afterSignInUrl={pageMode ? window.location.href : "/dashboard"}
               >
                 Sign In
               </SignInButton>

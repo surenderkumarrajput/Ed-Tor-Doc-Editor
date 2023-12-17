@@ -56,7 +56,6 @@ function Editor({ editable, onChange, initialContent }: EditorType) {
       className="w-full h-full [&>*:first-child]:h-full [&>*:first-child]:bg-background
      "
       editor={editor}
-      content={initialContent ? JSON.parse(initialContent) : undefined}
       theme={theme === "dark" ? "dark" : "light"}
     />
   );

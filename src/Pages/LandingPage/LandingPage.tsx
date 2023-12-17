@@ -6,7 +6,7 @@ import Footer from "./_components/Footer";
 function LandingPage() {
   return (
     <div className="relative min-h-full w-full">
-      <Navbar />
+      <Navbar pageMode={false} />
       <div
         className="
         min-h-screen

@@ -35,7 +35,7 @@ function Dashboard() {
   }, [docIndex, documents]);
 
   useEffect(() => {
-    if ((initialUpdate || !documents) && currentDocId === documentId) {
+    if (initialUpdate || !documents || currentDocId === documentId) {
       return;
     }
     setcurrentDocId(documentId);

@@ -58,7 +58,7 @@ function PageMode() {
       }}
     >
       <div className="relative min-h-screen w-full bg-gray-200 dark:bg-neutral-900">
-        <Navbar />
+        <Navbar pageMode={true} />
         <div className="flex h-[calc(100vh-3.5rem)] w-full gap-4 p-2">
           <div className="h-full w-full flex-[4] relative flex justify-center">
             <div
