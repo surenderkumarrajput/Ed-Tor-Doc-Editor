@@ -16,7 +16,7 @@ const publishableKey = process.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="ui-theme">
-      <div className="h-screen w-screen">
+      <div className="h-screen">
         <ConvexProvider client={ConvexClient}>
           <ClerkProvider publishableKey={publishableKey}>
             <CustomRoutes />

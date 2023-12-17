@@ -80,34 +80,38 @@ function SideBar() {
         {docData ? <Share /> : null}
       </div>
 
-      {documents?.map((e: DocumentType) => (
-        <li className="w-full flex" key={e._id}>
-          <Button
-            variant={"ghost"}
-            className="w-full justify-start"
-            onClick={() => {
-              navigate({
-                search: createSearchParams({
-                  documentId: e._id,
-                }).toString(),
-              });
-              setsideBarOpen(false);
-            }}
-          >
-            {e?.title}
-          </Button>
-          <Button
-            variant={"ghost"}
-            className="rounded-xl"
-            onClick={() => {
-              onDelete(e._id);
-            }}
-            size={"icon"}
-          >
-            <Trash />
-          </Button>
-        </li>
-      ))}
+      {documents.length > 0 ? (
+        documents?.map((e: DocumentType) => (
+          <li className="w-full flex" key={e._id}>
+            <Button
+              variant={"ghost"}
+              className="w-full justify-start"
+              onClick={() => {
+                navigate({
+                  search: createSearchParams({
+                    documentId: e._id,
+                  }).toString(),
+                });
+                setsideBarOpen(false);
+              }}
+            >
+              {e?.title}
+            </Button>
+            <Button
+              variant={"ghost"}
+              className="rounded-xl"
+              onClick={() => {
+                onDelete(e._id);
+              }}
+              size={"icon"}
+            >
+              <Trash />
+            </Button>
+          </li>
+        ))
+      ) : (
+        <h3>No Docs Added</h3>
+      )}
     </div>
   );
 }

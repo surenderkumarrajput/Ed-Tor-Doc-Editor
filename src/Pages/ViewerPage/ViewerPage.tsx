@@ -19,6 +19,7 @@ function PageMode() {
   const [sideBarOpen, setsideBarOpen] = useState(false);
   const [documentLoading, setdocumentLoading] = useState(true);
   const documentId: Id<"DocumentData"> | any = params.get("documentId") || null;
+  const [initialUpdate, setinitialUpdate] = useState(false);
 
   const documentData: any =
     useQuery(api.Documents.GetDocumentDataByIdForPageView, {
@@ -26,6 +27,11 @@ function PageMode() {
     }) || null;
 
   useEffect(() => {
+    if (initialUpdate || !documentData) {
+      return;
+    }
+    setinitialUpdate(true);
+
     if (!documentData?.authorised) {
       return;
     }

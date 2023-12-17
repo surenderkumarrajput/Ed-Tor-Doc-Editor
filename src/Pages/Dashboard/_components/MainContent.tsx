@@ -1,5 +1,5 @@
 import Loading from "@/components/Loading/Loading";
-import { lazy, useContext, useMemo } from "react";
+import { useContext } from "react";
 import { DocDataContext } from "@/Context/Context";
 import { ConvexClient } from "@/App";
 import { api } from "../../../../convex/_generated/api";

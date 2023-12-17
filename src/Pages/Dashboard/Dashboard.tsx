@@ -16,7 +16,8 @@ function Dashboard() {
   const [docIndex, setdocIndex] = useState(-1);
   const [documentLoading, setdocumentLoading] = useState(true);
   const documentId: any = params.get("documentId") || null;
-
+  const [initialUpdate, setinitialUpdate] = useState(false);
+  const [currentDocId, setcurrentDocId] = useState(null);
   const documents =
     useQuery(api.Documents.GetDocuments, {
       uid: user?.id,
@@ -34,8 +35,14 @@ function Dashboard() {
   }, [docIndex, documents]);
 
   useEffect(() => {
+    if ((initialUpdate || !documents) && currentDocId === documentId) {
+      return;
+    }
+    setcurrentDocId(documentId);
+    setinitialUpdate(true);
     setdocumentLoading(true);
     let index = documents?.findIndex((e) => e._id === documentId);
+
     setdocIndex(index !== undefined ? index : -1);
     if (index === -1 || docIndex === index) {
       setTimeout(() => {
